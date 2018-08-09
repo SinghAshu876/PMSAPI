@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alkatv.rest.requests.LoginRequest;
+import com.alkatv.rest.requests.LogoutRequest;
 import com.alkatv.rest.requests.RegistrationRequest;
 import com.alkatv.rest.responses.LoginResponse;
+import com.alkatv.rest.responses.LogoutResponse;
 import com.alkatv.rest.responses.RegistrationResponse;
 import com.alkatv.services.ApplicationUsersService;
 import com.alkatv.util.ResourceURIs;
@@ -45,6 +47,16 @@ public class AppUsersResource {
 		log.info("register");
 		RegistrationResponse registrationResponse = applicationUsersService.register(registrationRequest);
 		return Response.status(200).entity(registrationResponse).build();
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path(ResourceURIs.APP_USERS_LOGOUT)
+	public Response logout(LogoutRequest logoutRequest) throws Exception {
+		log.info("logout");
+		LogoutResponse logoutResponse = applicationUsersService.logout(logoutRequest);
+		return Response.status(200).entity(logoutResponse).build();
 	}
 
 }

@@ -13,8 +13,10 @@ import com.alkatv.messages.ErrorMessages;
 import com.alkatv.messages.UserMessages;
 import com.alkatv.repositories.ApplicationUsersRepository;
 import com.alkatv.rest.requests.LoginRequest;
+import com.alkatv.rest.requests.LogoutRequest;
 import com.alkatv.rest.requests.RegistrationRequest;
 import com.alkatv.rest.responses.LoginResponse;
+import com.alkatv.rest.responses.LogoutResponse;
 import com.alkatv.rest.responses.RegistrationResponse;
 import com.alkatv.rest.responses.ResponseType;
 import com.alkatv.util.UserGroup;
@@ -43,11 +45,11 @@ public class ApplicationUsersService {
 	}
 
 	public RegistrationResponse register(RegistrationRequest registrationRequest) throws Exception {
-		
+
 		ApplicationUsers appUsers = applicationUsersRepository.isUnameExists(registrationRequest.getUserName());
 		if (Objects.nonNull(appUsers))
 			throw new AppException(ErrorMessages.REGISTRATION_UNAME_EXISTS);
-		
+
 		ApplicationUsers applicationUsers = new ApplicationUsers();
 		applicationUsers.setPassword(registrationRequest.getPwd());
 		applicationUsers.setUserName(registrationRequest.getUserName());
@@ -58,5 +60,12 @@ public class ApplicationUsersService {
 		regResponse.setResponseType(ResponseType.SUCCESS);
 		regResponse.setMessage(UserMessages.REGISTRATION_SUCCESS);
 		return regResponse;
+	}
+
+	public LogoutResponse logout(LogoutRequest logoutRequest) throws Exception {
+		LogoutResponse logoutResponse = new LogoutResponse();
+		logoutResponse.setResponseType(ResponseType.SUCCESS);
+		return logoutResponse;
+
 	}
 }

@@ -11,5 +11,6 @@ public interface ResourceURIs{
 	String APP_USERS_ROOT = "/appusers";
 	String APP_USERS_LOGIN = "/login";
 	String APP_USERS_REGISTER = "/register";
+	String APP_USERS_LOGOUT = "/logout";
 
 }
